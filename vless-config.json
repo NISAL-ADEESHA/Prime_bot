@@ -1,0 +1,13 @@
+{
+    "Dialog": {
+        "1001": {
+            "1": "vless://xxxxxxxxxxxx@host:443?type=tcp&security=tls#Dialog_Pkg1",
+            "2": "vless://yyyyyyyyyyyy@host:443?type=tcp&security=tls#Dialog_Pkg2"
+        }
+    },
+    "Airtel": {
+        "2001": {
+            "1": "vless://zzzzzzzzzzzz@host:443?type=tcp&security=tls#Airtel_Pkg1"
+        }
+    }
+}
