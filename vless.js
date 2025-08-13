@@ -26,7 +26,8 @@ module.exports = async function handleVless(sock, from, body) {
 }
 
 const fs = require( fs );
-const v2rayInfo = fs.readFileSync( ./v2ray-info.txt ,  utf-8 );
+const v2rayInfo = fs.readFileSync('./v2ray-info.txt', 'utf-8');
+
 
         else if (body === '2') {
             await sock.sendMessage(from, { text: "🛠 Setup guide: \n1. App එක download කරන්න...\n2. Config import කරන්න..." });
