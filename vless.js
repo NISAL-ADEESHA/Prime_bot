@@ -3,15 +3,16 @@ const fs = require('fs');
 module.exports = async (client, msg) => {
     const body = msg.body.trim();
 
-    // Menu handling
     if (body === '.v2ray') {
-        await client.sendMessage(msg.from,
+        await client.sendMessage(
+            msg.from,
 `Please select an option:
 1. මොකක්ද v2ray එකක් කියන්නෙ
 2. v2ray එක setup කරන විදිය
 3. v2ray එක ගන්න
 4. Premium
-5. developer`);
+5. developer`
+        );
     } else if (body === '1') {
         const info = fs.readFileSync('./v2ray-info.txt', 'utf8');
         await client.sendMessage(msg.from, info);
