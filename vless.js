@@ -1,5 +1,8 @@
+const fs = require('fs');
 const vlessConfig = require('./vless-config.json');
-const botState = {};
+const v2rayInfo = fs.readFileSync(__dirname + '/v2ray-info.txt', 'utf-8');
+
+const botState = {}; // Tracks user progress
 
 module.exports = async function handleVless(sock, from, body) {
     body = body.trim();
@@ -12,36 +15,27 @@ module.exports = async function handleVless(sock, from, body) {
 2. v2ray එක setup කරන විදිය
 3. v2ray එක ගන්න
 4. Premium
-5. Developer` 
+5. Developer`
         });
         botState[from] = { step: 'mainMenu' };
         return;
     }
 
-    // Main menu selection
+    // Main menu
     if (botState[from]?.step === 'mainMenu') {
         if (body === '1') {
-    await sock.sendMessage(from, { text: v2rayInfo });
-    delete botState[from];
-}
-
-const fs = require( fs );
-const v2rayInfo = fs.readFileSync('./v2ray-info.txt', 'utf-8');
-
-
-        else if (body === '2') {
-            await sock.sendMessage(from, { text: "🛠 Setup guide: \n1. App එක download කරන්න...\n2. Config import කරන්න..." });
+            await sock.sendMessage(from, { text: v2rayInfo });
             delete botState[from];
-        }
-        else if (body === '3') {
+        } else if (body === '2') {
+            await sock.sendMessage(from, { text: "🛠 Setup guide:\n1. App එක download කරන්න.\n2. Config import කරන්න.\n3. Connect කරන්න." });
+            delete botState[from];
+        } else if (body === '3') {
             await sock.sendMessage(from, { text: "Select your ISP:\n1. Dialog\n2. Airtel" });
             botState[from] = { step: 'selectISP' };
-        }
-        else if (body === '4') {
-            await sock.sendMessage(from, { text: "💎 Premium V2Ray plans:\n- Rs.500 / Month\nContact: 077xxxxxxx" });
+        } else if (body === '4') {
+            await sock.sendMessage(from, { text: "💎 Premium V2Ray plans:\n- Rs.500 / Month\n📞 Contact: 0779312821" });
             delete botState[from];
-        }
-        else if (body === '5') {
+        } else if (body === '5') {
             await sock.sendMessage(from, { text: "👨‍💻 Developer: Nisal Adeesha\n📞 0779312821" });
             delete botState[from];
         }
@@ -53,8 +47,7 @@ const v2rayInfo = fs.readFileSync('./v2ray-info.txt', 'utf-8');
         if (body === '1') {
             botState[from] = { step: 'enterISP', isp: 'Dialog' };
             await sock.sendMessage(from, { text: "Enter your Dialog ISP number:" });
-        } 
-        else if (body === '2') {
+        } else if (body === '2') {
             botState[from] = { step: 'enterISP', isp: 'Airtel' };
             await sock.sendMessage(from, { text: "Enter your Airtel ISP number:" });
         }
